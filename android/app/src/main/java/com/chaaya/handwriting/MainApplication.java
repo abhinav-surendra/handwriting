@@ -1,15 +1,17 @@
-package com.invertase.rnfirebasestarter;
+package com.chaaya.handwriting;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import co.apptailor.googlesignin.RNGoogleSigninPackage;
+import io.invertase.firebase.RNFirebasePackage;
+import com.terrylinla.rnsketchcanvas.SketchCanvasPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 
-import io.invertase.firebase.RNFirebasePackage;
 // optional packages - add/remove as appropriate
 import io.invertase.firebase.admob.RNFirebaseAdMobPackage;
 import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
@@ -44,6 +46,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.asList(
         new MainReactPackage(),
+            new RNGoogleSigninPackage(),
+            new SketchCanvasPackage(),
         new RNFirebasePackage(),
         // add/remove these packages as appropriate
         new RNFirebaseAdMobPackage(),

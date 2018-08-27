@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "562045084622",
+    "firebase_url": "https://handwritingapp-93d72.firebaseio.com",
+    "project_id": "handwritingapp-93d72",
+    "storage_bucket": "handwritingapp-93d72.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:562045084622:android:e41b013dcdccba60",
+        "android_client_info": {
+          "package_name": "com.chaaya.handwriting"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "562045084622-raf63bj2ckacnvq1r9l4oel4rq5kp4r5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAry2cRtqVOkVrbWm214fbGibWQU5aQF8I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

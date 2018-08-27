@@ -108,7 +108,7 @@ android {
   compileSdkVersion 27
 
   defaultConfig {
-    applicationId "com.invertase.rnfirebasestarter"
+    applicationId "com.chaaya.handwriting"
     minSdkVersion 18
     targetSdkVersion 27
     versionCode 1
@@ -137,7 +137,23 @@ android {
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
   }
-  // applicationVariants are e.g. debug, release
+  signingConfigs {
+    debug {
+      storeFile file('keystores/debug.keystore.jks')
+      keyAlias 'key0'
+      keyPassword 'android'
+      storePassword 'android'
+    }
+    /*
+    release {
+        storeFile file('release.keystore')
+        storePassword "mystorepassword"
+        keyAlias "mykeyalias"
+        keyPassword "mykeypassword"
+    }
+    */
+  }
+    // applicationVariants are e.g. debug, release
   applicationVariants.all { variant ->
     variant.outputs.each { output ->
       // For each separate APK per architecture, set a unique version code as described here:
@@ -161,6 +177,10 @@ dependencies {
     transitive = true
   }
 
+  implementation(project(':@terrylinla/react-native-sketch-canvas')) {
+    transitive = false
+  }
+
   // RNFirebase required dependencies
   implementation "com.google.firebase:firebase-core:16.0.1"
   implementation "com.google.android.gms:play-services-base:15.0.1"
@@ -177,6 +197,10 @@ dependencies {
   implementation "com.google.firebase:firebase-storage:16.0.1"
   implementation "com.google.firebase:firebase-messaging:17.1.0"
   implementation "com.google.firebase:firebase-perf:16.0.0"
+  implementation(project(":react-native-google-signin")){
+    exclude group: "com.google.android.gms" // very important
+  }
+  implementation 'com.google.android.gms:play-services-auth:15.0.1' // should be at least 15.0.0 to work with most recent APIS
 
   implementation "com.facebook.react:react-native:+"
   implementation "com.android.support:appcompat-v7:27.1.1"
@@ -194,3 +218,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply plugin: 'com.google.gms.google-services'
+com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true
