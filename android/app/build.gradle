@@ -169,6 +169,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-uuid-generator')
   implementation(project(':react-native-firebase')) {
     transitive = false
   }

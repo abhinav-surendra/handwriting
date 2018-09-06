@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "babel-jest": "^23.4.0",
+    "babel-jest": "^23.4.2",
     "babel-preset-react-native-stage-0": "^1.0.1",
     "fs-extra": "^6.0.1",
-    "jest": "^23.4.0",
-    "react-test-renderer": "^16.4.1",
-    "replace-in-file": "^3.4.0"
+    "jest": "^23.5.0",
+    "react-test-renderer": "^16.4.2",
+    "replace-in-file": "^3.4.2"
   },
   "scripts": {
     "android": "react-native run-android",
@@ -21,12 +21,13 @@
     "preset": "react-native"
   },
   "dependencies": {
-    "@terrylinla/react-native-sketch-canvas": "^0.7.0",
+    "@terrylinla/react-native-sketch-canvas": "^0.8.0",
     "fbjs": "^0.8.17",
-    "react": "^16.3.2",
-    "react-native": "^0.55.3",
-    "react-native-firebase": "^4.3.6",
+    "react": "^16.4.2",
+    "react-native": "^0.55.4",
+    "react-native-firebase": "^4.3.8",
     "react-native-google-signin": "^1.0.0-rc3",
-    "react-navigation": "^2.11.2"
+    "react-native-uuid-generator": "^4.0.1",
+    "react-navigation": "^2.12.1"
   }
 }

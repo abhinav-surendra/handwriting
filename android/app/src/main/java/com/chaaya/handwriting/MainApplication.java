@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import io.github.traviskn.rnuuidgenerator.RNUUIDGeneratorPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import com.terrylinla.rnsketchcanvas.SketchCanvasPackage;
@@ -46,6 +47,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.asList(
         new MainReactPackage(),
+            new RNUUIDGeneratorPackage(),
             new RNGoogleSigninPackage(),
             new SketchCanvasPackage(),
         new RNFirebasePackage(),
