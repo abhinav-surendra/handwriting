@@ -18,6 +18,7 @@ export default class Handwriting extends Component {
   }
 
   componentDidMount() {
+    //get only for the selected language
     this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate)
 
   }
@@ -43,6 +44,7 @@ export default class Handwriting extends Component {
 
     this.setState({
       letters,
+      currentLetter: letters[Math.floor(Math.random() * letters.length)],
       loading: false,
     });
   }
@@ -64,7 +66,7 @@ export default class Handwriting extends Component {
         {userContext =>
           <View style={styles.container}>
 
-            <Text style={{ flex: 1, flexDirection: 'row' }}>{this.state.letters[0].alphabet}</Text>
+            <Text style={{ flex: 1, flexDirection: 'row' }}>{this.state.currentLetter.alphabet}</Text>
             {/* <FlatList
             data={this.state.todos}
             renderItem={({ item }) => <Text>{item.language}</Text>}
@@ -84,30 +86,8 @@ export default class Handwriting extends Component {
               />
               <Button
                 onPress={() => {
-                  // save(imageType, transparent, folder, filename, includeImage, includeText, cropToImageSize) {
                   UUIDGenerator.getRandomUUID().then((uuid) => {
-                    this.canvas.save('png', 'handwriting', uuid+'.png', true, false, true, true);
-                    var storageRef = firebase
-                      .storage()
-                      .ref('/'+uuid+'.png');
-                    storageRef
-                      .putFile(
-                        Environment.DIRECTORY_DOCUMENTS+'/'+uuid+'.png'
-                      )
-                      .then(() => {
-                        storageRef.getDownloadURL().then((url) => {
-                          var samplesRef = firebase.firestore().collection('samples');
-                          samplesRef.add(
-                            {
-                              letter: this.state.letters[0].key,
-                              user_id: userContext.user.uid,
-                              status: 'incomplete',
-                              image: url
-                            }
-                          )
-                        })
-                      })
-                      .catch(() => console.log('Failed putFile'));
+                    this.canvas.save('png', 'handwriting', uuid + '.png', true, false, true, true);
                   });
                 }}
                 title="Save"
@@ -120,6 +100,46 @@ export default class Handwriting extends Component {
                 canvasStyle={{ backgroundColor: 'transparent', flex: 1 }}
                 defaultStrokeIndex={0}
                 defaultStrokeWidth={5}
+                onSketchSaved={(result, path) => {
+                  console.log('saved to ' + path);
+                  this.canvas.clear();
+                  this.setState((state, props) => {
+                    return {
+                      ...state,
+                      currentLetter: state.letters[Math.floor(Math.random() * state.letters.length)],
+                      loading: false
+                    }
+                  });
+                  UUIDGenerator.getRandomUUID().then((uuid) => {
+                    var storageRef = firebase
+                      .storage()
+                      .ref('/' + uuid + '.png');
+                    storageRef
+                      .putFile(path)
+                      .then(() => {
+                        console.log('put file');
+                        storageRef.getDownloadURL().then((url) => {
+                          console.log('storageref');
+                          var samplesRef = firebase.firestore().collection('samples');
+                          samplesRef.add(
+                            {
+                              letter: this.state.currentLetter.key,
+                              user_id: userContext.user.uid,
+                              status: 'incomplete',
+                              image: url
+                            }
+                          );
+                        })
+                          .catch((error) => {
+                            console.log('Failed getDownloadURL ' + error);
+                          })
+                      })
+                      .catch(() => {
+                        console.log('Failed putFile');
+                      });
+                  })
+                }}
+
               />
             </View>
 

@@ -13,7 +13,7 @@ import firebase from 'react-native-firebase';
 import { GoogleSignin } from 'react-native-google-signin';
 import Login from './screens/login';
 import Home from './screens/home';
-import {UserContext} from './user_context';
+import { UserContext } from './user_context';
 
 export default class example extends Component {
   constructor() {
@@ -29,12 +29,14 @@ export default class example extends Component {
   componentDidMount() {
     //this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate)
     this.unsubscriber = firebase.auth().onAuthStateChanged((user) => {
-      var profile;
-      firebase.firestore().doc('profiles/'+user.uid).get().then(function(p) {
-        profile = p.data();
-        console.log(profile);
-        this.setState({ user, profile });
-      }.bind(this));
+      if (user != null) {
+        var profile;
+        firebase.firestore().doc('profiles/' + user.uid).get().then(function (p) {
+          profile = p.data();
+          console.log(profile);
+          this.setState({ user, profile });
+        }.bind(this));
+      }
     });
   }
 
