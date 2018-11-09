@@ -113,7 +113,7 @@ export default class Handwriting extends Component {
                   UUIDGenerator.getRandomUUID().then((uuid) => {
                     var storageRef = firebase
                       .storage()
-                      .ref('/' + uuid + '.png');
+                      .ref(uuid + '.png');
                     storageRef
                       .putFile(path)
                       .then(() => {

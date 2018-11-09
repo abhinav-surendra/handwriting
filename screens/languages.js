@@ -3,6 +3,7 @@ import { Button, Text, View, FlatList } from 'react-native';
 import firebase from 'react-native-firebase';
 import { UserContext } from '../user_context';
 import UserLanguages from './user_languages';
+import SideMenu from 'react-native-side-menu';
 
 export default class Languages extends Component {
   constructor() {
@@ -46,10 +47,13 @@ export default class Languages extends Component {
     });
   }
   render() {
+    const menu = <View style={{backgroundColor: 'blue', flexDirection: 'row', flex: 1}}><Text>Hello</Text></View>;
+
     return (
       <UserContext.Consumer>
         {userContext =>
-          <View>
+      <SideMenu menu={menu} isOpen={false}>
+        <View style={{backgroundColor: 'powderblue', flexDirection: 'row', flex: 1}}>
             <UserLanguages uid={userContext.user.uid} />
             <FlatList
               data={this.state.languages}
@@ -58,6 +62,7 @@ export default class Languages extends Component {
                   title={item.english_name}
                   onPress={() => this.onPress(item.key, userContext.user.uid)} />} />
           </View>
+          </SideMenu>
         }
       </UserContext.Consumer>
     );
